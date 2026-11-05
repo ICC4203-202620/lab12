@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es-CL">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Registro de mensajes · Laboratorio 12</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #18263c; background: #eef2f7; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    header { background: #142841; color: white; padding: 2.5rem max(1.25rem, calc((100vw - 760px) / 2)); }
+    header p { color: #bdcfe3; margin: 0; }
+    h1 { font-size: clamp(1.8rem, 5vw, 2.5rem); margin: .5rem 0; }
+    h2 { font-size: 1.3rem; margin-top: 0; }
+    main { max-width: 800px; padding: 1.5rem 1.25rem; margin: auto; }
+    section { background: white; border: 1px solid #d9e1ec; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    label { display: block; font-weight: 600; margin-bottom: .5rem; }
+    textarea { width: 100%; min-height: 100px; padding: .75rem; font: inherit; border: 1px solid #64748b; border-radius: 6px; }
+    button { border: 0; border-radius: 6px; padding: .7rem 1rem; background: #165ca2; color: white; font: inherit; cursor: pointer; }
+    button:disabled { opacity: .6; cursor: wait; }
+    button:focus-visible, textarea:focus-visible { outline: 3px solid #d38b00; outline-offset: 3px; }
+    .actions { display: flex; justify-content: space-between; align-items: center; gap: 1rem; margin-top: .75rem; }
+    small, time { color: #52657c; }
+    #status { min-height: 1.5rem; }
+    #status[data-error="true"] { color: #a12525; }
+    ul { list-style: none; padding: 0; }
+    li { border-top: 1px solid #e1e7ef; padding: 1rem 0; }
+    li p { white-space: pre-wrap; overflow-wrap: anywhere; margin: 0 0 .4rem; }
+    time { font-size: .85rem; }
+  </style>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header>
+    <p>ICC4203 · Laboratorio 12</p>
+    <h1>Registro de mensajes</h1>
+    <p>Una aplicación mínima con persistencia en Aurora DSQL.</p>
+  </header>
+  <main>
+    <section aria-labelledby="new-title">
+      <h2 id="new-title">Nuevo mensaje</h2>
+      <form id="message-form">
+        <label for="message">Texto del mensaje</label>
+        <textarea id="message" name="texto" maxlength="500" required aria-describedby="limit"></textarea>
+        <div class="actions">
+          <small id="limit">Hasta 500 caracteres.</small>
+          <button id="send" type="submit">Guardar</button>
+        </div>
+      </form>
+      <p id="status" role="status" aria-live="polite"></p>
+    </section>
+    <section aria-labelledby="list-title">
+      <div class="actions">
+        <h2 id="list-title">Mensajes guardados</h2>
+        <button id="reload" type="button">Actualizar</button>
+      </div>
+      <p id="empty">Consultando los mensajes…</p>
+      <ul id="messages"></ul>
+      <small>Se muestran los últimos 100 mensajes.</small>
+    </section>
+  </main>
+</body>
+</html>
